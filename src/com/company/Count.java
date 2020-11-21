@@ -7,12 +7,4 @@ public class Count {
     public Count() {
         count++;
     }
-
-    public static void main(String[] args) {
-        Count Count1 = new Count();
-        Count Count2 = new Count();
-        Count Count3 = new Count();
-
-        System.out.println("Created " + Count.count + " objects");
-    }
 }
