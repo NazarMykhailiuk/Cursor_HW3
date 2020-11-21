@@ -8,17 +8,15 @@ public class Circle {
         this.radius = radius;
     }
 
+    public void setRadius(double newRadius) {
+        this.radius = newRadius;
+    }
+
     private double calculateArea() {
         return radius * radius * Math.PI;
     }
 
     public String toString() {
         return "The area of the circle [radius = " + radius + "]: " + calculateArea();
-    }
-
-
-    public static void main(String[] args) {
-        Circle circle = new Circle(7);
-        System.out.print(circle);
     }
 }
