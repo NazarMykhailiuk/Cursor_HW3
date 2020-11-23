@@ -17,18 +17,18 @@ public class Cursor_HW3 {
         System.out.println("Created " + Count.count + " objects\n");
 
         // Task 3
-        System.out.println("Task 3");
         Car car1 = new Car();
-
-        car1.engineRunning = true;
-        car1.speed = 50.0f;
-        car1.increaseSpeed = 10.0f;
-        car1.decreaseSpeed = 20.0f;
         car1.startEngine();
-        car1.driving();
-        car1.accelerating();
-        car1.breaking();
+        car1.accelerating ( 25.5f);
+        car1.showCarStatus();
+        car1.breaking( 15.5f);
+        car1.showCarStatus();
+        car1.accelerating ( 10.0f);
+        car1.showCarStatus();
+        car1.breaking( 5.5f);
+        car1.showCarStatus();
         car1.stopCar();
+        car1.showCarStatus();
         car1.stopEngine();
     }
 }
