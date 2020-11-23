@@ -1,73 +1,63 @@
 package com.company;
 
 public class Car {
-    public boolean engineRunning;
-    public float speed;
-    public float increaseSpeed;
-    public float decreaseSpeed;
-
-    public float getSpeed() {
-        return this.speed;
-    }
-
-    public void setSpeed(float speed) {
-        this.speed = speed;
-    }
+    private boolean engineRunning;
+    private float speed;
 
     public void startEngine() {
-        if (engineRunning) {
+        if (!engineRunning) {
+            engineRunning = true;
             System.out.println("Engine has been started");
-        } else {
-            System.out.println("Engine is turn off");
-        }
+        } else
+            System.out.println("The engine is already running");
     }
 
     public void stopEngine() {
-        if (!engineRunning)
-            System.out.println("Engine have bee stopped");
-        else if (speed > 0 | ((increaseSpeed - decreaseSpeed) > 0)) {
-            System.out.println("Engine can't been stopped, the speed is largest than zero");
+        if (engineRunning) {
+            engineRunning = false;
+            speed = 0.0f;
+            System.out.println("The engine has been turned off");
         }
     }
-
-    public void driving() {
-        if (engineRunning & speed > 0)
-            System.out.println("Car is driving with speed: " + speed + " km/h.");
+    public void accelerating (float increaseSpeed) {
         if (!engineRunning)
-            System.out.println("Can't driving. The engine is turned off");
+            System.out.println("Can't increase speed. The engine is turned off");
         if (speed <= 0)
-            System.out.println("Speed can't bee zero or negative value. Please provide a valid value");
+            System.out.println("Can't increase speed by zero or negative value. Please provide a valid value");
+        this.speed += increaseSpeed;
     }
 
-    public void accelerating() {
-        if (increaseSpeed < 0)
-            System.out.println("Speed increased can't bee negative value. Please provide a valid value");
-        else if (engineRunning & speed > 0)
-            System.out.println("Car accelerating by: " + increaseSpeed + " km/h.");
+    public void breaking (float decreaseSpeed) {
         if (!engineRunning)
-            System.out.println("Can't accelerating. The engine is turned off");
-        if (speed > 200) {
-            System.out.println("Maximum speed exceeded!");
-            speed = 200;
+            System.out.println("Can't decrease speed. The engine is turned off");
+        if (decreaseSpeed <= 0)
+            System.out.println("Can't decrease speed by zero or negative value. Please provide a valid value");
+        if (speed != 0.0f)
+            this.speed -= decreaseSpeed;
+        if (speed < 0) {
+            speed = 0.0f;
         }
-    }
-
-    public void breaking() {
-        if (decreaseSpeed < 0)
-            System.out.println("Speed decreased can't bee negative value. Please provide a valid value");
-        else if (engineRunning & speed > 0 & ((speed + increaseSpeed - decreaseSpeed) >= 0))
-            System.out.println("Car breaking by: " + decreaseSpeed + " km/h.");
-        else if (!engineRunning)
-            System.out.println("Can't breaking. The engine is turned off");
-        if (decreaseSpeed > 180)
-            System.out.println("Maximum speed exceeded!! The speed value must be <= 180");
     }
 
     public void stopCar() {
-        if (!engineRunning)
-            System.out.println("Car is stopped");
-        else if (speed > 0 | ((increaseSpeed - decreaseSpeed) > 0)) {
-            System.out.println("Car can't bee stopped, the speed is largest than zero");
+        if (engineRunning) {
+            if (speed != 0.0f) {
+                speed = 0.0f;
+            } else {
+                System.out.println("Can't stop. The car is stopped now");
+            }
+        } else {
+            System.out.println("Can't stop. The engine is turned off");
         }
+    }
+    public void showCarStatus() {
+        if (engineRunning) {
+            if (speed == 0.0f) {
+                System.out.println("Car is stopped");
+                return;
+            }
+            System.out.println("The car is moving now with speed "+ speed + " km/h");
+        } else
+            System.out.println("The car is not started now");
     }
 }
