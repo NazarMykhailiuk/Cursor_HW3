@@ -1,11 +1,10 @@
 package com.company;
 
 public class Car {
-    private String Model;
     public boolean engineRunning;
-    public boolean going;
     public float speed;
     public float increaseSpeed;
+    public float decreaseSpeed;
 
     public float getSpeed() {
         return this.speed;
@@ -19,43 +18,56 @@ public class Car {
         if (engineRunning) {
             System.out.println("Engine has been started");
         } else {
-            System.out.println("Engine is already run");
+            System.out.println("Engine is turn off");
         }
     }
 
     public void stopEngine() {
-        if (engineRunning) {
-            System.out.println("Engine has been stopped");
-        } else {
-            System.out.println("Engine is already stopped");
+        if (!engineRunning)
+            System.out.println("Engine have bee stopped");
+        else if (speed > 0 | ((increaseSpeed - decreaseSpeed) > 0)) {
+            System.out.println("Engine can't been stopped, the speed is largest than zero");
         }
+    }
+
+    public void driving() {
+        if (engineRunning & speed > 0)
+            System.out.println("Car is driving with speed: " + speed + " km/h.");
+        if (!engineRunning)
+            System.out.println("Can't driving. The engine is turned off");
+        if (speed <= 0)
+            System.out.println("Speed can't bee zero or negative value. Please provide a valid value");
     }
 
     public void accelerating() {
-        System.out.println("Accelerating");
-        for (int i = 0; i < 5; i++) {
-            increaseSpeed += 5;
-            System.out.println(increaseSpeed + speed);
+        if (increaseSpeed < 0)
+            System.out.println("Speed increased can't bee negative value. Please provide a valid value");
+        else if (engineRunning & speed > 0)
+            System.out.println("Car accelerating by: " + increaseSpeed + " km/h.");
+        if (!engineRunning)
+            System.out.println("Can't accelerating. The engine is turned off");
+        if (speed > 200) {
+            System.out.println("Maximum speed exceeded!");
+            speed = 200;
         }
-        speed = getSpeed();
     }
 
     public void breaking() {
-        System.out.println("Breaking");
-        for (int i = 0; i < 5; i++) {
-            increaseSpeed -= 5;
-            System.out.println(increaseSpeed + speed);
-        }
-        speed = getSpeed();
+        if (decreaseSpeed < 0)
+            System.out.println("Speed decreased can't bee negative value. Please provide a valid value");
+        else if (engineRunning & speed > 0 & ((speed + increaseSpeed - decreaseSpeed) >= 0))
+            System.out.println("Car breaking by: " + decreaseSpeed + " km/h.");
+        else if (!engineRunning)
+            System.out.println("Can't breaking. The engine is turned off");
+        if (decreaseSpeed > 180)
+            System.out.println("Maximum speed exceeded!! The speed value must be <= 180");
     }
 
     public void stopCar() {
-        if (going) {
-            going = false;
-            speed = 0.0f;
+        if (!engineRunning)
             System.out.println("Car is stopped");
-        } else {
-            System.out.println("Car is already stopped");
+        else if (speed > 0 | ((increaseSpeed - decreaseSpeed) > 0)) {
+            System.out.println("Car can't bee stopped, the speed is largest than zero");
         }
     }
 }
